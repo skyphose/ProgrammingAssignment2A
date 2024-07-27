@@ -2,15 +2,35 @@
 ## skyphose.com
 ## coursera week 3 assignment 2
 
-## Write a short comment describing this function
-
+## make the matrix and the inversion then save to cache
 makeCacheMatrix <- function(x = matrix()) {
-
+  ## declare variables
+  c = NULL
+  set <- function(y) {
+    x <<- y
+    c <<- NULL
+  }
+  get <- function() x
+  ## how to do the inverting
+  setInverse <- function(inverse) c <<- inverse
+  getInverse <- function() c
+  ## spit out our functions
+  list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
 
 
-## Write a short comment describing this function
-
+## solve the cache and output
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  c <- x$getInverse()
+  ## check if the matrix was already done
+  if (!is.null(c)) {
+    message("Getting Cached Data")
+    return(c)
+  }
+  ## calcualte and output!!!
+  data <- x$get()
+  c <- solve(data,...)
+  x$setInverse(c)
+  ## output!
+  c
 }
